@@ -3,7 +3,7 @@
 #============================================#
 #     BCT TERMUX SETUP - COMPLETE TOOL      #
 #     Developer: SOFIKUL ISLAM               #
-#     Team: BCT (Bengal Cyber Team)          #
+#     Team: BCT (Bangladesh Cyber Troops)          #
 #     Version: 2.0                           #
 #============================================#
 
@@ -24,7 +24,7 @@ show_banner() {
     figlet -f slant "BCT TERMUX"
     echo -e "${CYAN}========================================="
     echo -e "${GREEN}   Developer: ${WHITE}SOFIKUL ISLAM"
-    echo -e "${GREEN}   Team: ${RED}BCT (Bengal Cyber Team)"
+    echo -e "${GREEN}   Team: ${RED}Bangladesh Cyber Troops (BCT)"
     echo -e "${GREEN}   Version: ${YELLOW}2.0"
     echo -e "${CYAN}=========================================${NC}"
     echo ""
@@ -55,7 +55,7 @@ main_menu() {
         echo -e "${BCT}║${GREEN} 6.${WHITE} Database Setup              ${BCT}║${NC}"
         echo -e "${BCT}║${GREEN} 7.${WHITE} Hacker Tools & Frameworks   ${BCT}║${NC}"
         echo -e "${BCT}║${GREEN} 8.${WHITE} Terminal Customization      ${BCT}║${NC}"
-        echo -e "${BCT}║${GREEN} 9.${WHITE} About BCT                   ${BCT}║${NC}"
+        echo -e "${BCT}║${GREEN} 9.${WHITE} About TeamBCT                   ${BCT}║${NC}"
         echo -e "${BCT}║${GREEN} 0.${WHITE} Exit                        ${BCT}║${NC}"
         echo -e "${BCT}╚════════════════════════════════════╝${NC}"
         
@@ -301,12 +301,12 @@ about_bct() {
     echo -e "${PURPLE}"
     figlet -f big "BCT"
     echo -e "${CYAN}══════════════════════════════════════════${NC}"
-    echo -e "${GREEN}Team Name: ${WHITE}Bengal Cyber Team (BCT)${NC}"
+    echo -e "${GREEN}Team Name: ${WHITE}Bangladesh Cyber Troops (BCT)${NC}"
     echo -e "${GREEN}Developer: ${WHITE}SOFIKUL ISLAM${NC}"
     echo -e "${GREEN}Version: ${WHITE}2.0${NC}"
-    echo -e "${GREEN}GitHub: ${WHITE}https://github.com/bct-team${NC}"
-    echo -e "${GREEN}Telegram: ${WHITE}t.me/bct_community${NC}"
-    echo -e "${GREEN}Website: ${WHITE}www.bengalcyberteam.com${NC}"
+    echo -e "${GREEN}GitHub: ${WHITE}https://github.com/MR-D4RK-OFFICIAL${NC}"
+    echo -e "${GREEN}Telegram: ${WHITE}t.me/bct_muslims${NC}"
+    echo -e "${GREEN}Website: ${WHITE}www.teambct.top${NC}"
     echo -e "${CYAN}══════════════════════════════════════════${NC}"
     echo -e "${YELLOW}"
     echo "📌 Features:"
