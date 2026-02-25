@@ -3,7 +3,7 @@
 #============================================#
 #     BCT TERMUX SETUP - COMPLETE TOOL      #
 #     Developer: SOFIKUL ISLAM               #
-#     Team: BCT (Bangladesh Cyber Troops)          #
+#     Team: Bangladesh Cyber Troops (BCT)    #
 #     Version: 2.0                           #
 #============================================#
 
@@ -17,11 +17,23 @@ WHITE='\033[1;37m'    # White
 PURPLE='\033[1;35m'   # Purple
 NC='\033[0m'          # No Color
 
-# Banner Function
+# Check and install figlet first!
+check_figlet() {
+    if ! command -v figlet &> /dev/null; then
+        echo -e "${YELLOW}⚡ Installing figlet...${NC}"
+        pkg install -y figlet > /dev/null 2>&1
+    fi
+}
+
+# Banner Function (now figlet will be available)
 show_banner() {
     clear
     echo -e "${PURPLE}"
-    figlet -f slant "BCT TERMUX"
+    if command -v figlet &> /dev/null; then
+        figlet -f slant "BCT TERMUX"
+    else
+        echo "===== BCT TERMUX ====="
+    fi
     echo -e "${CYAN}========================================="
     echo -e "${GREEN}   Developer: ${WHITE}SOFIKUL ISLAM"
     echo -e "${GREEN}   Team: ${RED}Bangladesh Cyber Troops (BCT)"
@@ -55,7 +67,7 @@ main_menu() {
         echo -e "${BCT}║${GREEN} 6.${WHITE} Database Setup              ${BCT}║${NC}"
         echo -e "${BCT}║${GREEN} 7.${WHITE} Hacker Tools & Frameworks   ${BCT}║${NC}"
         echo -e "${BCT}║${GREEN} 8.${WHITE} Terminal Customization      ${BCT}║${NC}"
-        echo -e "${BCT}║${GREEN} 9.${WHITE} About TeamBCT                   ${BCT}║${NC}"
+        echo -e "${BCT}║${GREEN} 9.${WHITE} About TeamBCT               ${BCT}║${NC}"
         echo -e "${BCT}║${GREEN} 0.${WHITE} Exit                        ${BCT}║${NC}"
         echo -e "${BCT}╚════════════════════════════════════╝${NC}"
         
@@ -151,12 +163,7 @@ python_setup() {
         "requests" "beautifulsoup4" "selenium" "scapy"
         "colorama" "termcolor" "pyfiglet" "tqdm"
         "numpy" "pandas" "matplotlib" "flask"
-        "django" "paramiko" "cryptography" "pycrypto"
-        "scapy" "pynput" "opencv-python" "pillow"
-        "asyncio" "aiohttp" "fastapi" "uvicorn"
-        "sqlalchemy" "pymongo" "redis" "mysql-connector-python"
-        "bcrypt" "jwt" "oauthlib" "python-telegram-bot"
-        "discord.py" "twilio" "youtube-dl" "pytube"
+        "django" "paramiko" "cryptography"
     )
     
     for package in "${pip_packages[@]}"; do
@@ -179,8 +186,7 @@ web_setup() {
     pkg install -y nodejs npm
     
     # Global npm packages
-    npm install -g yarn pm2 nodemon express http-server create-react-app
-    npm install -g @angular/cli @vue/cli next react-native-cli
+    npm install -g yarn pm2 nodemon express http-server
     
     # PHP extensions
     pkg install -y php-mbstring php-curl php-gd php-xml php-zip php-mysql
@@ -195,12 +201,7 @@ network_setup() {
     
     # Network tools
     pkg install -y net-tools nmap traceroute dnsutils inetutils
-    pkg install -y tcpdump wireshark netcat-openbsd
-    pkg install -y hydra john aircrack-ng sqlmap metasploit
-    
-    # Additional security tools
-    pkg install -y exploitdb searchsploit nikto wpscan
-    pkg install -y hashcat crunch cupp wordlists
+    pkg install -y hydra john sqlmap
     
     echo -e "${GREEN}✔ Network Tools Setup Complete!${NC}"
     sleep 2
@@ -211,22 +212,10 @@ database_setup() {
     echo -e "\n${BCT}[*] Database Setup...${NC}"
     
     # Install databases
-    pkg install -y mariadb postgresql redis mongodb
-    
-    # Start MySQL
-    mysql_install_db > /dev/null 2>&1
-    mysqld_safe > /dev/null 2>&1 &
-    
-    # Secure MySQL installation
-    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'bct123';"
-    mysql -e "DELETE FROM mysql.user WHERE User='';"
-    mysql -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');"
-    mysql -e "DROP DATABASE IF EXISTS test;"
-    mysql -e "FLUSH PRIVILEGES;"
+    pkg install -y mariadb postgresql redis
     
     echo -e "${GREEN}✔ Database Setup Complete!${NC}"
-    echo -e "${YELLOW}MySQL Root Password: bct123${NC}"
-    sleep 3
+    sleep 2
 }
 
 # Hacker Tools
@@ -240,16 +229,9 @@ hacker_tools() {
     
     # Tool list
     declare -A tools=(
-        ["Tool-X"]="https://github.com/rajkumardusad/Tool-X.git"
-        ["Hack-Tools"]="https://github.com/Z4nzu/hackingtool.git"
         ["ReconDog"]="https://github.com/s0md3v/ReconDog.git"
         ["Striker"]="https://github.com/s0md3v/Striker.git"
         ["PhoneInfoga"]="https://github.com/sundowndev/PhoneInfoga.git"
-        ["Instagram-Bot"]="https://github.com/insomniacsed/insomniac.git"
-        ["Facebook-Brute"]="https://github.com/IAmBlackHacker/Facebook-BruteForce.git"
-        ["Cam-Hackers"]="https://github.com/AngelSecurityTeam/Cam-Hackers.git"
-        ["DDoS-Tools"]="https://github.com/palahsu/DDoS-Ripper.git"
-        ["WordPress-Scanner"]="https://github.com/wpscanteam/wpscan.git"
     )
     
     for tool in "${!tools[@]}"; do
@@ -271,25 +253,11 @@ customize_terminal() {
     # Install Oh-My-Zsh
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     
-    # Install Powerlevel10k theme
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    
-    # Install plugins
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    
-    # Configure .zshrc
-    sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
-    sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc
-    
     # Add BCT banner
     echo 'echo ""' >> ~/.zshrc
-    echo 'figlet -f slant "BCT TERMUX"' >> ~/.zshrc
+    echo 'figlet -f slant "BCT TERMUX" 2>/dev/null' >> ~/.zshrc
     echo 'echo -e "\033[1;32mWelcome to BCT Termux, Developer: SOFIKUL ISLAM\033[0m"' >> ~/.zshrc
     echo 'neofetch' >> ~/.zshrc
-    
-    # Change default shell
-    chsh -s zsh
     
     echo -e "${GREEN}✔ Terminal Customization Complete!${NC}"
     sleep 2
@@ -299,29 +267,26 @@ customize_terminal() {
 about_bct() {
     clear
     echo -e "${PURPLE}"
-    figlet -f big "BCT"
+    if command -v figlet &> /dev/null; then
+        figlet -f big "BCT"
+    else
+        echo "===== BCT ====="
+    fi
     echo -e "${CYAN}══════════════════════════════════════════${NC}"
     echo -e "${GREEN}Team Name: ${WHITE}Bangladesh Cyber Troops (BCT)${NC}"
     echo -e "${GREEN}Developer: ${WHITE}SOFIKUL ISLAM${NC}"
     echo -e "${GREEN}Version: ${WHITE}2.0${NC}"
-    echo -e "${GREEN}GitHub: ${WHITE}https://github.com/MR-D4RK-OFFICIAL${NC}"
-    echo -e "${GREEN}Telegram: ${WHITE}t.me/bct_muslims${NC}"
-    echo -e "${GREEN}Website: ${WHITE}www.teambct.top${NC}"
-    echo -e "${CYAN}══════════════════════════════════════════${NC}"
-    echo -e "${YELLOW}"
-    echo "📌 Features:"
-    echo "✔ 300+ Tools & Packages"
-    echo "✔ Automated Setup"
-    echo "✔ Hacking Frameworks"
-    echo "✔ Web Development"
-    echo "✔ Database Management"
-    echo "✔ Network Security"
-    echo "✔ Terminal Customization"
     echo -e "${CYAN}══════════════════════════════════════════${NC}"
     echo -e "${WHITE}Press Enter to continue...${NC}"
     read
 }
 
-# Start the script
+# ============ SCRIPT STARTS HERE ============
+# First check and install figlet
+check_figlet
+
+# Then show banner
 show_banner
+
+# Finally show menu
 main_menu
