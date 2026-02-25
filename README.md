@@ -1,13 +1,13 @@
 # 🔥 BCT TERMUX SETUP
 
-![BCT Banner](banner/bct-logo.png)
+![BCT Banner](bct-logo.png)
 
 ## 📌 About
-**BCT TERMUX SETUP** is a complete automated setup tool for Termux, developed by **SOFIKUL ISLAM** of **Bengal Cyber Team (BCT)**. This tool will transform your Termux into a complete development and security environment.
+**BCT TERMUX SETUP** is a complete automated setup tool for Termux, developed by **SOFIKUL ISLAM** of **Bangladesh Cyber Troops (BCT)**. This tool will transform your Termux into a complete development and security environment.
 
 ## 👨‍💻 Developer
 - **Name:** SOFIKUL ISLAM
-- **Team:** Bengal Cyber Team (BCT)
+- **Team:** Bangladesh Cyber Troops (BCT)
 - **Version:** 2.0
 
 ## ✨ Features
@@ -28,7 +28,7 @@
 ```bash
 pkg update && pkg upgrade -y
 pkg install git -y
-git clone https://github.com/bct-team/BCT-TERMUX-SETUP
+git clone https://github.com/MR-D4RK-OFFICIAL/BCT-TERMUX-SETUP.git
 cd BCT-TERMUX-SETUP
 chmod +x install.sh setup.sh
 bash install.sh
